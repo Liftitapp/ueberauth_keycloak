@@ -199,13 +199,7 @@ defmodule Ueberauth.Strategy.Keycloak do
       def validate_token(_plug, nil), do: {:error, nil}
 
       def validate_token(conn, token) do
-        case introspect_token(conn, token) do
-          {:ok, _} = response ->
-            response
-
-          {:error, _} = error ->
-            error
-        end
+        introspect_token(conn, token)
       end
 
       defp introspect_token(conn, token) do
